@@ -26,8 +26,20 @@ public class Singer extends Thread {
         super();
     }
     
-    // Here comes the real thing :)
+    @Override
+    public void run() {
+        sing();
+    }
     
+    private synchronized void sing() {
+        while (!stopIt) {
+            if (voice == Voice.FIRST) {
+                synch.singFirstVoice(performance.getLyrics(), performance.getDelay());
+            } else {
+                synch.singSecondVoice(performance.getLyrics(), performance.getDelay());
+            }
+        }
+    }
     
     public String getSingerName() {
         return singerName;
