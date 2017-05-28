@@ -16,11 +16,11 @@ public class Test {
     private Singer paulMcCartney;
     
     private void initializeSingingInThreads() {
-        String lyrics1 = "I read the news today, oh boy" + '\n' + "...";
-        String lyrics2 = '\t' + "Woke up, fell out of bed" + '\n' + '\t' + "...";
+        String lyrics1 = "I read the news today, oh boy" + '\n' + "..." + '\n';
+        String lyrics2 = '\t' + "Woke up, fell out of bed" + '\n' + '\t' + "..." + '\n';
         
-        Performance firstVoicePerformance = new Performance(lyrics1, 1000);
-        Performance secondVoicePerformance = new Performance(lyrics2, 1000);
+        Performance firstVoicePerformance = new Performance(lyrics1, 1500);
+        Performance secondVoicePerformance = new Performance(lyrics2, 1500);
         
         Synchronizer synch = new Synchronizer(true);
         boolean stopIt = false;
