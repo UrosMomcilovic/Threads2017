@@ -11,7 +11,8 @@ public class Main {
 //		t.simpleDelay();
 //		t.simpleWait();
 //		t.loopWait();
-		t.testTimer();
+//		t.testTimer();
+		t.testSingInThreads();
 	}
 
 }

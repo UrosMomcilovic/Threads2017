@@ -24,8 +24,8 @@ public class Synchronizer {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            singCurrent(lyrics1, delay);
         }
+        singCurrent(lyrics1, delay);
     }
 
     public synchronized void singSecondVoice(String lyrics2, int delay) {
@@ -36,8 +36,8 @@ public class Synchronizer {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            singCurrent(lyrics2, delay);
         }
+        singCurrent(lyrics2, delay);
     }
 
     /**

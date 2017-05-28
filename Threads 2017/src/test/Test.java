@@ -33,9 +33,12 @@ public class Test {
         
         initializeSingingInThreads();
         
-        // Here comes the real thing :)
+        johnLennon.start();
+        paulMcCartney.start();
         
-        
+        IN.nextLine();
+        johnLennon.setStopIt(true);
+        paulMcCartney.setStopIt(true);
     }
     
 	public void simpleDelay() {
