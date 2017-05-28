@@ -21,8 +21,8 @@ public class TestTimerTask extends TimerTask {
 		System.out.println();
 		System.out.println("Hi :)");
 		System.out.println();
-		timer.cancel();
-		timer.purge();
+		timer.cancel();	// cancel timer task (terminate its thread)
+		timer.purge();	// remove all cancelled tasks from this timer's task queue; practically unnecessary after cancel()
 	}
 
 }
