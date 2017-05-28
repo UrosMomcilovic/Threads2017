@@ -16,8 +16,44 @@ public class Synchronizer {
     public Synchronizer() {
     }
 
-    // Here comes the real thing :)
-    
+    public synchronized void singFirstVoice(String lyrics1, int delay) {
+        while (!firstVoiceFlag) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            singCurrent(lyrics1, delay);
+        }
+    }
+
+    public synchronized void singSecondVoice(String lyrics2, int delay) {
+        while (firstVoiceFlag) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            singCurrent(lyrics2, delay);
+        }
+    }
+
+    /**
+     * @param lyrics
+     */
+    private void singCurrent(String lyrics, int delay) {
+        try {
+            wait(delay);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(lyrics);
+        firstVoiceFlag = !firstVoiceFlag;
+        notifyAll();
+    }
     
     public boolean isFirstVoiceFlag() {
         return firstVoiceFlag;
