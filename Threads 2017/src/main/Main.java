@@ -10,7 +10,8 @@ public class Main {
 		
 //		t.simpleDelay();
 //		t.simpleWait();
-		t.loopWait();
+//		t.loopWait();
+		t.testTimer();
 	}
 
 }

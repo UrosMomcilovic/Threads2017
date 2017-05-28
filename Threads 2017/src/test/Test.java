@@ -1,5 +1,7 @@
 package test;
 
+import java.util.Timer;
+
 public class Test {
 	
 	public void simpleDelay() {
@@ -33,6 +35,13 @@ public class Test {
 			System.out.println(j + 1);
 		}
 		System.out.println("Done.");
+	}
+	
+	public void testTimer() {
+		Timer timer = new Timer();
+		TestTimerTask task = new TestTimerTask(timer);
+		timer.schedule(task, 2500);
+		loopWait();
 	}
 
 }
