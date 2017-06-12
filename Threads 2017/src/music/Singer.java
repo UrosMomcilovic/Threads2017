@@ -35,8 +35,10 @@ public class Singer extends Thread {
         while (!stopIt) {
             if (voice == Voice.FIRST) {
                 synch.singFirstVoice(performance.getLyrics(), performance.getDelay());
-            } else {
+            } else if(voice == Voice.SECOND){
                 synch.singSecondVoice(performance.getLyrics(), performance.getDelay());
+            }else if(voice == Voice.INSTRUMENTAL){
+            	synch.playInstrumental(performance.getLyrics(), performance.getDelay());
             }
         }
     }

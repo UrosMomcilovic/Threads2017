@@ -8,5 +8,5 @@ public enum Voice {
     
     FIRST,
     SECOND,
-    BACKGROUND
+    INSTRUMENTAL
 }

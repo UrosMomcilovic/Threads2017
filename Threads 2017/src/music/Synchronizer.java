@@ -6,9 +6,9 @@ package music;
 
 public class Synchronizer {
     
-    private boolean firstVoiceFlag;
+    private Voice firstVoiceFlag;
 
-    public Synchronizer(boolean firstVoiceFlag) {
+    public Synchronizer(Voice firstVoiceFlag) {
         super();
         this.firstVoiceFlag = firstVoiceFlag;
     }
@@ -17,7 +17,7 @@ public class Synchronizer {
     }
 
     public synchronized void singFirstVoice(String lyrics1, int delay) {
-        while (!firstVoiceFlag) {
+        while (firstVoiceFlag != Voice.FIRST) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -29,7 +29,7 @@ public class Synchronizer {
     }
 
     public synchronized void singSecondVoice(String lyrics2, int delay) {
-        while (firstVoiceFlag) {
+        while (firstVoiceFlag != Voice.SECOND) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -38,6 +38,18 @@ public class Synchronizer {
             }
         }
         singCurrent(lyrics2, delay);
+    }
+    
+    public synchronized void playInstrumental(String instrumental, int delay) {
+        while (firstVoiceFlag != Voice.INSTRUMENTAL) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        singCurrent(instrumental, delay);
     }
 
     /**
@@ -51,15 +63,21 @@ public class Synchronizer {
             e.printStackTrace();
         }
         System.out.println(lyrics);
-        firstVoiceFlag = !firstVoiceFlag;
+        if(firstVoiceFlag == Voice.FIRST){
+        	firstVoiceFlag = Voice.SECOND;
+        }else if(firstVoiceFlag == Voice.SECOND){
+        	firstVoiceFlag = Voice.INSTRUMENTAL;
+        }else{
+        	firstVoiceFlag = Voice.FIRST;
+        }
         notifyAll();
     }
     
-    public boolean isFirstVoiceFlag() {
+    public Voice getFirstVoiceFlag() {
         return firstVoiceFlag;
     }
 
-    public void setFirstVoiceFlag(boolean firstVoiceFlag) {
+    public void setFirstVoiceFlag(Voice firstVoiceFlag) {
         this.firstVoiceFlag = firstVoiceFlag;
     }
     

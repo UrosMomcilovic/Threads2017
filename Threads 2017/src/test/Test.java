@@ -14,19 +14,23 @@ public class Test {
     
     private Singer johnLennon;
     private Singer paulMcCartney;
+    private Singer georgeHarrison;
     
     private void initializeSingingInThreads() {
         String lyrics1 = "I read the news today, oh boy" + '\n' + "..." + '\n';
         String lyrics2 = '\t' + "Woke up, fell out of bed" + '\n' + '\t' + "..." + '\n';
+        String instrumental = "\t\t" + "Guitar" + '\n' + "\t\t" + "..." + '\n'; 
         
         Performance firstVoicePerformance = new Performance(lyrics1, 1500);
         Performance secondVoicePerformance = new Performance(lyrics2, 1500);
+        Performance instrumentalPerformance = new Performance(instrumental, 1500);
         
-        Synchronizer synch = new Synchronizer(true);
+        Synchronizer synch = new Synchronizer(Voice.FIRST);
         boolean stopIt = false;
         
         johnLennon = new Singer("John Lennon", Voice.FIRST, firstVoicePerformance, synch, stopIt);
         paulMcCartney = new Singer("PaulMcCartney", Voice.SECOND, secondVoicePerformance, synch, stopIt);
+        georgeHarrison = new Singer("George Harrison", Voice.INSTRUMENTAL, instrumentalPerformance, synch, stopIt);
     }
     
     public void testSingInThreads() {
@@ -35,10 +39,12 @@ public class Test {
         
         johnLennon.start();
         paulMcCartney.start();
+        georgeHarrison.start();
         
         IN.nextLine();
         johnLennon.setStopIt(true);
         paulMcCartney.setStopIt(true);
+        georgeHarrison.setStopIt(true);
     }
     
 	public void simpleDelay() {
